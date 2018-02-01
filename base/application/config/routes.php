@@ -54,5 +54,6 @@ $route['page/(any:)'] = 'page/$1';
 $route['signup'] = 'account/signup';
 $route['signin'] = 'account/signin';
 $route['signout'] = 'account/signout';
+$route['success/(any:)'] = '$1/success/$2';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
