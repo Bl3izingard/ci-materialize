@@ -5,9 +5,9 @@ class Page extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->view('head');
-		$this->load->view('header');
+		$this->load->view('template/head');
+		$this->load->view('template/header');
 		$this->load->view('page/home');
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 }
