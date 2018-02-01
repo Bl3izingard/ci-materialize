@@ -7,10 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<title>Sign In</title>
 	</head>
 	<body>
-
-	<?php echo validation_errors(); ?>
-
-	<?php echo form_open('form'); ?>
 	
 	<form>
 
