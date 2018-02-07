@@ -1,10 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="fr">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<!-- Compiled and minified CSS -->
-  	<link href="<?php echo base_url("assets/css/materialize.min.css");?>" rel="stylesheet">
+  	<link href="<?php echo base_url("assets/css/materialize.min.css");?>" rel="stylesheet" media="screen,projection">
+  	<link href="<?php echo base_url("assets/css/style.css");?>" type="text/css" rel="stylesheet" media="screen,projection"/>
   	<link href="<?php echo base_url("assets/font/*");?>" rel="stylesheet">
   	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!--Import Google Icon Font-->
