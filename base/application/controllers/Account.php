@@ -11,26 +11,34 @@ class Account extends CI_Controller {
 	
 	public function signin()
 	{
-	    $this->load->view('head');
-	    $this->load->view('header');
-	    $this->load->view('signin');
-	    $this->load->view('footer');
+	    $this->load->view('template/head');
+	    $this->load->view('template/header');
+	    $this->load->view('account/signin');
+	    $this->load->view('template/footer');
+	}
+	
+	public function success()
+	{
+	    $this->load->view('template/head');
+	    $this->load->view('template/header');
+	    $this->load->view('account/success');
+	    $this->load->view('template/footer');
 	}
 	
 	public function signout()
 	{
-	    $this->load->view('head');
-	    $this->load->view('header');
-	    $this->load->view('signout');
-	    $this->load->view('footer');
+	    $this->load->view('template/head');
+	    $this->load->view('template/header');
+	    $this->load->view('account/signout');
+	    $this->load->view('template/footer');
 	}
 	
 	public function signup()
 	{
-	    $this->load->view('head');
-	    $this->load->view('header');
-	    $this->load->view('signup');
-	    $this->load->view('footer');
+	    $this->load->view('template/head');
+	    $this->load->view('template/header');
+	    $this->load->view('account/signup');
+	    $this->load->view('template/footer');
 	}
 }
 ?>
