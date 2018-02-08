@@ -5,7 +5,9 @@ class Page extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->view('template/head');
+		$data["title_page"] = "";
+		
+		$this->load->view('template/head', $data);
 		$this->load->view('template/header');
 		$this->load->view('page/home');
 		$this->load->view('template/footer');
