@@ -1,24 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
-<html>
-	<head>
-		<title>Sign In</title>
-	</head>
-	<body>
-	
+<div class="container">
 	<form>
 
-	<h5>Pseudonyme ou E-mail</h5>
+	<h5>Login</h5>
 	<input type="text" name="username" value="" size="50" />
 
-	<h5>Mot de passe</h5>
+	<h5>Password</h5>
 	<input type="text" name="password" value="" size="50" />
 
-	<div><input type="submit" value="Submit" /></div>
+	<button class="btn waves-effect waves-light" type="submit">Sign in <i class="material-icons right">send</i></button>
 
 	</form>
-
-	</body>
-</html>
+</div>

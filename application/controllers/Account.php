@@ -11,7 +11,9 @@ class Account extends CI_Controller {
 	
 	public function signin()
 	{
-	    $this->load->view('template/head');
+		$data["title_page"] = "";
+		
+	    $this->load->view('template/head', $data);
 	    $this->load->view('template/header');
 	    $this->load->view('account/signin');
 	    $this->load->view('template/footer');
