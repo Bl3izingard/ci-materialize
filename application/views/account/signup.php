@@ -2,29 +2,34 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<html>
-	<head>
-		<title>Sign In</title>
-	</head>
-	<body>
-	
-	<form>
-
-	<h5>Pseudonyme</h5>
-	<input type="text" name="username" value="" size="50" />
-
-	<h5>Mot de passe</h5>
-	<input type="text" name="password" value="" size="50" />
-
-	<h5>Confirmation du mot de passe</h5>
-	<input type="text" name="passconf" value="" size="50" />
-
-	<h5>Adresse E-mail</h5>
-	<input type="text" name="email" value="" size="50" />
-
-	<div><input type="submit" value="Submit" /></div>
-
-	</form>
-
-	</body>
-</html>
+<div class="container">
+	<div class="row">
+		<form class="col s12 m7 offset-m3 l8 offset-l2">
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="login" type="text" class="validate"> <label for="login">Login</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<input id="password" type="password" class="validate"> <label
+						for="password">Password</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="password_confirm" type="password" class="validate"> <label
+						for="password_confirm">Confirm password</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="email" type="email" class="validate"> <label for="email">E-mail</label>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-light" type="submit">
+					Sign up <i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
