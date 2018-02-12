@@ -29,11 +29,43 @@ class Account extends CI_Controller {
 		/*
 		 * Sign In Form Script
 		 */
-		
-	    $this->load->view('template/head', $data);
-	    $this->load->view('template/header');
-	    $this->load->view('account/signin');
-	    $this->load->view('template/footer');
+		if ($this->form_validation->run() == FALSE)
+		{
+			/*
+			 * Sign In Form Prep Data
+			 */
+			$data["form_login"] = array(
+					"name"          => 'login',
+					"id"            => 'login',
+					"value" => set_value("login"),
+					"class" => (empty(form_error("login"))) ? "validate" : "validate invalid"
+			);
+			$data["form_login_label"] = array(
+					"data-error" => form_error('login', null, null)
+			);
+			
+			$data["form_password"] = array(
+					"name"          => 'password',
+					"id"            => 'password',
+					"value" => set_value("password"),
+					"class" => (empty(form_error("password"))) ? "validate" : "validate invalid"
+			);
+			$data["form_password_label"] = array(
+					"data-error" => form_error('password', null, null)
+			);
+			
+			
+			$this->load->view('template/head', $data);
+			$this->load->view('template/header');
+			$this->load->view('account/signin', $data);
+			$this->load->view('template/footer');
+		}
+		else
+		{
+			
+			
+			$this->success();
+		}
 	}
 	
 	public function success()
@@ -125,6 +157,12 @@ class Account extends CI_Controller {
 			/*
 			 * Insert into BDD
 			 */
+			$user = array(
+					"login" => set_value('login'),
+					"email" => set_value('email'),
+					"password" => password_hash(set_value('password'), PASSWORD_BCRYPT)
+			);
+			$this->db->insert('user', $user);
 			
 			$this->success();
 		}

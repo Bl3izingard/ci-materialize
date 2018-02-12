@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'ci_materialize',
+	'hostname' => '127.0.0.1',
+	'username' => 'ci-materialize',
+	'password' => 'ci-materializepwd',
+	'database' => 'ci-materialize',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

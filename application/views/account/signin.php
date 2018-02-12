@@ -3,21 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">
 	<div class="row">
-		<?php echo form_open('signin', array("class" => "col s12 m7 offset-m3 l6 offset-l3")); ?>
+		<?php echo form_open('signin', array("class" => "col s12 m7 offset-m3 l6 offset-l3", "novalidate" => "")); ?>
 			<div class="row">
 				<div class="input-field col s12">
 				<?php 
 					echo form_input($form_login);
 					
-					echo form_label($form_login_label);
+					echo form_label("Login", "login", $form_login_label);
 				?>
-					<input id="login" type="text" class="validate"> <label for="login">Login</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="password" type="password" class="validate"> <label
-						for="password">Password</label>
+				<?php 
+					echo form_input($form_password);
+					
+					echo form_label("Password", "password", $form_password_label);
+				?>
 				</div>
 			</div>
 			<div class="row">

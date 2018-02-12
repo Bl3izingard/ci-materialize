@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="container">
 	<div class="row">
-		<?php echo form_open('signup', array("class" => "col s12 m7 offset-m3 l6 offset-l3")); ?>
+		<?php echo form_open('signup', array("class" => "col s12 m7 offset-m3 l6 offset-l3", "novalidate" => "")); ?>
 			<div class="row">
 				<div class="input-field col s12">
 				<?php 
@@ -18,14 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="row">
 				<div class="input-field col s6">
 				<?php 
-					echo form_input($form_password);
+					echo form_password($form_password);
 					
 					echo form_label("Password", "password", $form_password_label);
 				?>
 				</div>
 				<div class="input-field col s6">
 				<?php 
-					echo form_input($form_password_confirm);
+					echo form_password($form_password_confirm);
 					
 					echo form_label("Password Confirmation", "password_confirm", $form_password_confirm_label);
 				?>
