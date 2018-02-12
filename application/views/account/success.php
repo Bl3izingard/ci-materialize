@@ -2,15 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<html>
-	<head>
-		<title>Success</title>
-	</head>
-	<body>
-
-	<div>
-		<h3>Your form was successfully submitted!</h3>
+<div class="container">
+	<h4>Success !</h4>
+	<div class="row">
+		<div class="col s2">
+			<i class="material-icons large">mood_good</i>
+		</div>
+		<div class="col s10">
+			<p class="flow-text"><?php echo $text; ?></p>
+		</div>
 	</div>
-	
-	</body>
-</html>
+</div>
