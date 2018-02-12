@@ -1,28 +1,43 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 ?>
 
 <div class="container">
 	<div class="row">
-		<form class="col s12 m7 offset-m3 l8 offset-l2">
+		<?php echo form_open('signup', array("class" => "col s12 m7 offset-m3 l6 offset-l3")); ?>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="login" type="text" class="validate"> <label for="login">Login</label>
+				<?php 
+					echo form_input($form_login);
+					
+					echo form_label("Login", "login", $form_login_label);
+				?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
-					<input id="password" type="password" class="validate"> <label
-						for="password">Password</label>
+				<?php 
+					echo form_input($form_password);
+					
+					echo form_label("Password", "password", $form_password_label);
+				?>
 				</div>
 				<div class="input-field col s6">
-					<input id="password_confirm" type="password" class="validate"> <label
-						for="password_confirm">Confirm password</label>
+				<?php 
+					echo form_input($form_password_confirm);
+					
+					echo form_label("Password Confirmation", "password_confirm", $form_password_confirm_label);
+				?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="email" type="email" class="validate"> <label for="email">E-mail</label>
+				<?php 
+					echo form_input($form_email);
+					
+					echo form_label("Email", "email", $form_email_label);
+				?>
 				</div>
 			</div>
 			<div class="row">
@@ -30,6 +45,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					Sign up <i class="material-icons right">send</i>
 				</button>
 			</div>
-		</form>
+		<?php echo form_close(); ?>
 	</div>
 </div>
