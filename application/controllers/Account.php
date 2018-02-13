@@ -10,6 +10,7 @@ class Account extends CI_Controller
 	{
 		parent::__construct ();
 		
+		$this->load->model("account_model");
 		$this->load->helper ( "form" );
 		$this->load->library ( 'form_validation' );
 	}
@@ -26,7 +27,7 @@ class Account extends CI_Controller
 		/*
 		 * Sign In Form Script
 		 */
-		if ($this->form_validation->run () == FALSE || ($user_data = $this->check_credential(set_value('login'), set_value('password'))) == FALSE)
+		if ($this->form_validation->run () == FALSE || ($user_data = $this->account_model->check_credential(set_value('login'), set_value('password'))) == FALSE)
 		{
 			/*
 			 * Sign In Form Prep Data
@@ -171,12 +172,7 @@ class Account extends CI_Controller
 			/*
 			 * Insert into BDD
 			 */
-			$user = array (
-					"login" => set_value ( 'login' ),
-					"email" => set_value ( 'email' ),
-					"password" => password_hash ( set_value ( 'password' ), PASSWORD_BCRYPT ) );
-			
-			if ($this->db->insert ( 'user', $user ))
+			if ($this->account_model->insert_user(set_value ( "login" ), set_value ( "email" ), set_value ( "password" )))
 			{
 				$this->success ("signup");
 				
@@ -225,23 +221,6 @@ class Account extends CI_Controller
 		{
 			redirect('/signin');
 		}
-	}
-	
-	private function check_credential($login, $password)
-	{
-		$user = $this->db->get_where("user", array("login" => $login), 1);
-
-		if($user->num_rows())
-		{
-			$row = $user->row();
-			
-			if(password_verify($password, $row->password))
-			{
-				return $row;
-			}
-		}
-		
-		return false;
 	}
 }
 ?>
