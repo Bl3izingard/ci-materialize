@@ -1,30 +1,50 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 ?>
 
-<html>
-	<head>
-		<title>Sign In</title>
-	</head>
-	<body>
-	
-	<form>
-
-	<h5>Pseudonyme</h5>
-	<input type="text" name="username" value="" size="50" />
-
-	<h5>Mot de passe</h5>
-	<input type="text" name="password" value="" size="50" />
-
-	<h5>Confirmation du mot de passe</h5>
-	<input type="text" name="passconf" value="" size="50" />
-
-	<h5>Adresse E-mail</h5>
-	<input type="text" name="email" value="" size="50" />
-
-	<div><input type="submit" value="Submit" /></div>
-
-	</form>
-
-	</body>
-</html>
+<div class="container">
+	<div class="row">
+		<?php echo form_open('signup', array("class" => "col s12 m7 offset-m3 l6 offset-l3", "novalidate" => "")); ?>
+			<div class="row">
+				<div class="input-field col s12">
+				<?php 
+					echo form_input($form_login);
+					
+					echo form_label("Login", "login", $form_login_label);
+				?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+				<?php 
+					echo form_password($form_password);
+					
+					echo form_label("Password", "password", $form_password_label);
+				?>
+				</div>
+				<div class="input-field col s6">
+				<?php 
+					echo form_password($form_password_confirm);
+					
+					echo form_label("Password Confirmation", "password_confirm", $form_password_confirm_label);
+				?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<?php 
+					echo form_input($form_email);
+					
+					echo form_label("Email", "email", $form_email_label);
+				?>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-light" type="submit">
+					Sign up <i class="material-icons right">send</i>
+				</button>
+			</div>
+		<?php echo form_close(); ?>
+	</div>
+</div>
