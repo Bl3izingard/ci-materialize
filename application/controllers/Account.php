@@ -21,6 +21,7 @@ class Account extends CI_Controller
 	{
 		// Page Title
 		$data ["title_page"] = "";
+		$user_data = FALSE;
 		
 		/*
 		 * Sign In Form Script
@@ -44,6 +45,13 @@ class Account extends CI_Controller
 					"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid" );
 			$data ["form_password_label"] = array (
 					"data-error" => form_error ( 'password', null, null ) );
+			
+			if(!$user_data && $this->form_validation->run ())
+			{
+				$data ["form_password"]["class"] = "validate invalid";
+				
+				$data ["form_password_label"]["data-error"] = "Bad combinaison login/password";
+			}
 			
 			$this->load->view ( 'template/head', $data );
 			$this->load->view ( 'template/header' );
