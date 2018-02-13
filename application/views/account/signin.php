@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="row">
 				<div class="input-field col s12">
 				<?php 
-					echo form_input($form_password);
+					echo form_password($form_password);
 					
 					echo form_label("Password", "password", $form_password_label);
 				?>

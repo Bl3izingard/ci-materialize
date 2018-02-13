@@ -180,7 +180,7 @@ class Account extends CI_Controller
 	
 	public function me()
 	{
-		if($this->is_logged())
+		if($this->toolbox->is_logged())
 		{
 			// Page Title
 			$data ["title_page"] = "";
@@ -199,7 +199,7 @@ class Account extends CI_Controller
 	
 	public function dashboard()
 	{
-		if($this->is_logged())
+		if($this->toolbox->is_logged())
 		{
 			// Page Title
 			$data ["title_page"] = "";
@@ -231,11 +231,6 @@ class Account extends CI_Controller
 		}
 		
 		return false;
-	}
-	
-	private function is_logged()
-	{
-		return $this->session->has_userdata("user");
 	}
 }
 ?>
