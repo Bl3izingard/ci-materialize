@@ -10,6 +10,7 @@ class Account extends CI_Controller
 	{
 		parent::__construct ();
 		
+		$this->load->model("account_model");
 		$this->load->helper ( "form" );
 		$this->load->library ( 'form_validation' );
 	}
@@ -21,11 +22,12 @@ class Account extends CI_Controller
 	{
 		// Page Title
 		$data ["title_page"] = "";
+		$user_data = FALSE;
 		
 		/*
 		 * Sign In Form Script
 		 */
-		if ($this->form_validation->run () == FALSE || ($user_data = $this->check_credential(set_value('login'), set_value('password'))) == FALSE)
+		if ($this->form_validation->run () == FALSE || ($user_data = $this->account_model->check_credential(set_value('login'), set_value('password'))) == FALSE)
 		{
 			/*
 			 * Sign In Form Prep Data
@@ -44,6 +46,13 @@ class Account extends CI_Controller
 					"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid" );
 			$data ["form_password_label"] = array (
 					"data-error" => form_error ( 'password', null, null ) );
+			
+			if(!$user_data && $this->form_validation->run ())
+			{
+				$data ["form_password"]["class"] = "validate invalid";
+				
+				$data ["form_password_label"]["data-error"] = "Bad combinaison login/password";
+			}
 			
 			$this->load->view ( 'template/head', $data );
 			$this->load->view ( 'template/header' );
@@ -68,6 +77,7 @@ class Account extends CI_Controller
 		{
 			case "signup" :
 				$data ["text"] = "Congratulation ! You can now sign in.";
+				$data ["mini_text"] = "You will be redirect in 5 sec...";
 				break;
 			case "signout" :
 				$data ["text"] = "You are now sign out. We hope see you soon !";
@@ -102,6 +112,8 @@ class Account extends CI_Controller
 		$this->load->view ( 'template/header' );
 		$this->load->view ( 'account/signout' );
 		$this->load->view ( 'template/footer' );
+		
+		$this->output->set_header('refresh:5; url='.base_url());
 	}
 	public function signup()
 	{
@@ -162,14 +174,11 @@ class Account extends CI_Controller
 			/*
 			 * Insert into BDD
 			 */
-			$user = array (
-					"login" => set_value ( 'login' ),
-					"email" => set_value ( 'email' ),
-					"password" => password_hash ( set_value ( 'password' ), PASSWORD_BCRYPT ) );
-			
-			if ($this->db->insert ( 'user', $user ))
+			if ($this->account_model->insert_user(set_value ( "login" ), set_value ( "email" ), set_value ( "password" )))
 			{
-				$this->success ();
+				$this->success ("signup");
+				
+				$this->output->set_header('refresh:5; url='.base_url());
 			}
 			else
 			{
@@ -214,23 +223,6 @@ class Account extends CI_Controller
 		{
 			redirect('/signin');
 		}
-	}
-	
-	private function check_credential($login, $password)
-	{
-		$user = $this->db->get_where("user", array("login" => $login), 1);
-
-		if($user->num_rows())
-		{
-			$row = $user->row();
-			
-			if(password_verify($password, $row->password))
-			{
-				return $row;
-			}
-		}
-		
-		return false;
 	}
 }
 ?>

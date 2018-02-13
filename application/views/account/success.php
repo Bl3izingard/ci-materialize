@@ -10,6 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<div class="col s10">
 			<p class="flow-text"><?php echo $text; ?></p>
+			<?php if(!empty($mini_text)) : ?>
+				<p><?php echo $mini_text; ?></p>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
