@@ -76,6 +76,7 @@ class Account extends CI_Controller
 		{
 			case "signup" :
 				$data ["text"] = "Congratulation ! You can now sign in.";
+				$data ["mini_text"] = "You will be redirect in 5 sec...";
 				break;
 			case "signout" :
 				$data ["text"] = "You are now sign out. We hope see you soon !";
@@ -177,7 +178,9 @@ class Account extends CI_Controller
 			
 			if ($this->db->insert ( 'user', $user ))
 			{
-				$this->success ();
+				$this->success ("signup");
+				
+				$this->output->set_header('refresh:5; url='.base_url());
 			}
 			else
 			{
