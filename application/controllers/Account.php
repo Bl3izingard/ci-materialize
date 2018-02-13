@@ -112,6 +112,8 @@ class Account extends CI_Controller
 		$this->load->view ( 'template/header' );
 		$this->load->view ( 'account/signout' );
 		$this->load->view ( 'template/footer' );
+		
+		$this->output->set_header('refresh:5; url='.base_url());
 	}
 	public function signup()
 	{

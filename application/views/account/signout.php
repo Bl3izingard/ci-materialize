@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<div class="col s10">
 			<p class="flow-text">Your are succefully disconnected !</p>
+			<p>You will be redirect in 5 sec...</p>
 		</div>
 	</div>
 </div>
