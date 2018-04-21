@@ -21,7 +21,9 @@ class Account extends CI_Controller
 	public function signin()
 	{
 		// Page Title
-		$data ["title_page"] = "";
+		$data ["title_page"] = "Sign In";
+		$data ["template_home"] = "";
+		
 		$user_data = FALSE;
 		
 		/*
@@ -71,7 +73,7 @@ class Account extends CI_Controller
 	public function success($type_success = "default")
 	{
 		// Page Title
-		$data ["title_page"] = "";
+		$data ["title_page"] = "Success !";
 		
 		switch ($type_success)
 		{
@@ -95,7 +97,7 @@ class Account extends CI_Controller
 	public function failed()
 	{
 		// Page Title
-		$data ["title_page"] = "";
+		$data ["title_page"] = "Oups !";
 		
 		$this->load->view ( 'template/head', $data );
 		$this->load->view ( 'template/header' );
@@ -106,7 +108,7 @@ class Account extends CI_Controller
 	{
 		$this->session->sess_destroy ();
 		// Page Title
-		$data ["title_page"] = "";
+		$data ["title_page"] = "Goodbye";
 		
 		$this->load->view ( 'template/head', $data );
 		$this->load->view ( 'template/header' );
@@ -118,7 +120,8 @@ class Account extends CI_Controller
 	public function signup()
 	{
 		// Page Title
-		$data ["title_page"] = "";
+		$data ["title_page"] = "Sign Up";
+		$data ["template_home"] = "";
 		
 		if ($this->form_validation->run () == FALSE)
 		{

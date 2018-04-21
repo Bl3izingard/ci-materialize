@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<main>
 <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
@@ -93,3 +94,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <div class="parallax"><img src="<?php echo base_url("assets/images/background3.jpg");?>" alt="Unsplashed background img 3"></div>
   </div>
+  </main>

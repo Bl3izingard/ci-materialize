@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '127.0.0.1',
+	'hostname' => 'localhost',
 	'username' => 'ci-materialize',
-	'password' => 'ci-materializepwd',
+	'password' => '',
 	'database' => 'ci-materialize',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
