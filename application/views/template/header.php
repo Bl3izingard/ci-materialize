@@ -23,7 +23,7 @@ $menu ["notsign"] ["fullscreen"] = array (
 );
 $menu ["notsign"] ["mobile"] = array (
 		"Home" => base_url(),
-		"divider" => "",
+		"divider" => "",	
 		"Sign In" => base_url("signin"),
 		"Sign Up" => base_url("signup")
 );

@@ -1,8 +1,9 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+
 class Account extends CI_Controller
 {
-	
+
 	/*
 	 * Set Error Delimiter
 	 */
@@ -10,14 +11,16 @@ class Account extends CI_Controller
 	{
 		parent::__construct ();
 		
-		$this->load->model("account_model");
+		$this->load->model ( "account_model" );
 		$this->load->helper ( "form" );
 		$this->load->library ( 'form_validation' );
 	}
+
 	public function index()
 	{
 		signin ();
 	}
+
 	public function signin()
 	{
 		// Page Title
@@ -29,7 +32,7 @@ class Account extends CI_Controller
 		/*
 		 * Sign In Form Script
 		 */
-		if ($this->form_validation->run () == FALSE || ($user_data = $this->account_model->check_credential(set_value('login'), set_value('password'))) == FALSE)
+		if ($this->form_validation->run () == FALSE || ($user_data = $this->account_model->check_credential ( set_value ( 'login' ), set_value ( 'password' ) )) == FALSE)
 		{
 			/*
 			 * Sign In Form Prep Data
@@ -38,22 +41,26 @@ class Account extends CI_Controller
 					"name" => 'login',
 					"id" => 'login',
 					"value" => set_value ( "login" ),
-					"class" => (empty ( form_error ( "login" ) )) ? "validate" : "validate invalid" );
+					"class" => (empty ( form_error ( "login" ) )) ? "validate" : "validate invalid" 
+			);
 			$data ["form_login_label"] = array (
-					"data-error" => form_error ( 'login', null, null ) );
+					"data-error" => form_error ( 'login', null, null ) 
+			);
 			
 			$data ["form_password"] = array (
 					"name" => 'password',
 					"id" => 'password',
-					"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid" );
+					"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid" 
+			);
 			$data ["form_password_label"] = array (
-					"data-error" => form_error ( 'password', null, null ) );
+					"data-error" => form_error ( 'password', null, null ) 
+			);
 			
-			if(!$user_data && $this->form_validation->run ())
+			if (! $user_data && $this->form_validation->run ())
 			{
-				$data ["form_password"]["class"] = "validate invalid";
+				$data ["form_password"] ["class"] = "validate invalid";
 				
-				$data ["form_password_label"]["data-error"] = "Bad combinaison login/password";
+				$data ["form_password_label"] ["data-error"] = "Bad combinaison login/password";
 			}
 			
 			$this->load->view ( 'template/head', $data );
@@ -63,13 +70,14 @@ class Account extends CI_Controller
 		}
 		else
 		{
-			unset($user_data->password);
+			unset ( $user_data->password );
 			
-			$this->session->set_userdata("user", $user_data);
+			$this->session->set_userdata ( "user", $user_data );
 			
-			redirect('/account/me');
+			redirect ( '/account/me' );
 		}
 	}
+
 	public function success($type_success = "default")
 	{
 		// Page Title
@@ -94,6 +102,7 @@ class Account extends CI_Controller
 		$this->load->view ( 'account/success', $data );
 		$this->load->view ( 'template/footer' );
 	}
+
 	public function failed()
 	{
 		// Page Title
@@ -104,6 +113,7 @@ class Account extends CI_Controller
 		$this->load->view ( 'account/failed', $data );
 		$this->load->view ( 'template/footer' );
 	}
+
 	public function signout()
 	{
 		$this->session->sess_destroy ();
@@ -115,8 +125,9 @@ class Account extends CI_Controller
 		$this->load->view ( 'account/signout' );
 		$this->load->view ( 'template/footer' );
 		
-		$this->output->set_header('refresh:5; url='.base_url());
+		$this->output->set_header ( 'refresh:5; url=' . base_url () );
 	}
+
 	public function signup()
 	{
 		// Page Title
@@ -133,39 +144,47 @@ class Account extends CI_Controller
 					"id" => 'login',
 					"value" => set_value ( "login" ),
 					"class" => (empty ( form_error ( "login" ) )) ? "validate" : "validate invalid",
-					"required" => "required" );
+					"required" => "required" 
+			);
 			$data ["form_login_label"] = array (
 					"data-error" => form_error ( 'login', null, null ),
-					"data-success" => "OK" );
+					"data-success" => "OK" 
+			);
 			
 			$data ["form_password"] = array (
 					"name" => 'password',
 					"id" => 'password',
 					"value" => set_value ( "password" ),
 					"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid",
-					"required" => "required" );
+					"required" => "required" 
+			);
 			$data ["form_password_label"] = array (
 					"data-error" => form_error ( 'password', null, null ),
-					"data-success" => "OK" );
+					"data-success" => "OK" 
+			);
 			
 			$data ["form_password_confirm"] = array (
 					"name" => 'password_confirm',
 					"id" => 'password_confirm',
 					"class" => (empty ( form_error ( "password_confirm" ) )) ? "validate" : "validate invalid",
-					"required" => "required" );
+					"required" => "required" 
+			);
 			$data ["form_password_confirm_label"] = array (
 					"data-error" => form_error ( 'password_confirm', null, null ),
-					"data-success" => "OK" );
+					"data-success" => "OK" 
+			);
 			
 			$data ["form_email"] = array (
 					"name" => 'email',
 					"id" => 'email',
 					"value" => set_value ( "email" ),
 					"class" => (empty ( form_error ( "email" ) )) ? "validate" : "validate invalid",
-					"required" => "required" );
+					"required" => "required" 
+			);
 			$data ["form_email_label"] = array (
 					"data-error" => form_error ( 'email', null, null ),
-					"data-success" => "OK" );
+					"data-success" => "OK" 
+			);
 			
 			$this->load->view ( 'template/head', $data );
 			$this->load->view ( 'template/header' );
@@ -177,11 +196,11 @@ class Account extends CI_Controller
 			/*
 			 * Insert into BDD
 			 */
-			if ($this->account_model->insert_user(set_value ( "login" ), set_value ( "email" ), set_value ( "password" )))
+			if ($this->account_model->insert_user ( set_value ( "login" ), set_value ( "email" ), set_value ( "password" ) ))
 			{
-				$this->success ("signup");
+				$this->success ( "signup" );
 				
-				$this->output->set_header('refresh:5; url='.base_url());
+				$this->output->set_header ( 'refresh:5; url=' . base_url () );
 			}
 			else
 			{
@@ -189,14 +208,26 @@ class Account extends CI_Controller
 			}
 		}
 	}
-	
+
 	public function me()
 	{
-		if($this->toolbox->is_logged())
+		if ($this->toolbox->is_logged ())
 		{
+			
 			// Page Title
 			$data ["title_page"] = "";
-			$data ["user_data"] = $this->session->get_userdata("user");
+			$data ["user"] = $this->session->get_userdata ( "user" ) ["user"];
+			
+			/*
+			 * Edit Mail Form Prep Data
+			 */
+			$data ["form_email"] = array (
+					"name" => 'email',
+					"id" => 'email',
+					"value" => $data ["user"]->email,
+					"class" => "validate",
+					"required" => "required" 
+			);
 			
 			$this->load->view ( 'template/head', $data );
 			$this->load->view ( 'template/header' );
@@ -205,17 +236,17 @@ class Account extends CI_Controller
 		}
 		else
 		{
-			redirect('/signin');
+			redirect ( '/signin' );
 		}
 	}
-	
+
 	public function dashboard()
 	{
-		if($this->toolbox->is_logged())
+		if ($this->toolbox->is_logged ())
 		{
 			// Page Title
 			$data ["title_page"] = "";
-			$data ["user_data"] = $this->session->get_userdata("user");
+			$data ["user_data"] = $this->session->get_userdata ( "user" );
 			
 			$this->load->view ( 'template/head', $data );
 			$this->load->view ( 'template/header' );
@@ -224,7 +255,118 @@ class Account extends CI_Controller
 		}
 		else
 		{
-			redirect('/signin');
+			redirect ( '/signin' );
+		}
+	}
+
+	public function edit($type)
+	{
+		if ($this->toolbox->is_logged ())
+		{
+			// Page Title
+			$data ["title_page"] = "Change my informations";
+			$data ["user"] = $this->session->get_userdata ( "user" ) ["user"];
+			
+			if ($this->form_validation->run () == FALSE)
+			{
+				switch ($type)
+				{
+					case "infos" :
+					/*
+					 * Edit Infos Form Prep Data
+					 */
+					$data ["form_email"] = array (
+								"name" => 'email',
+								"id" => 'email',
+								"value" => (! empty ( set_value ( "email" ) )) ? set_value ( "email" ) : $data ["user"]->email,
+								"class" => (empty ( form_error ( "email" ) )) ? "validate" : "validate invalid",
+								"required" => "required" 
+						);
+						$data ["form_email_label"] = array (
+								"data-error" => form_error ( 'email', null, null ),
+								"data-success" => "OK" 
+						);
+						
+						break;
+					case "password" :
+					/*
+					 * Sign Up Form Prep Data
+					 */
+					$data ["form_old_password"] = array (
+								"name" => 'old_password',
+								"id" => 'old_password',
+								"value" => set_value ( "old_password" ),
+								"class" => (empty ( form_error ( "old_password" ) )) ? "validate" : "validate invalid",
+								"required" => "required" 
+						);
+						$data ["form_old_password_label"] = array (
+								"data-error" => form_error ( 'old_password', null, null ),
+								"data-success" => "OK" 
+						);
+						
+						$data ["form_password"] = array (
+								"name" => 'password',
+								"id" => 'password',
+								"value" => set_value ( "password" ),
+								"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid",
+								"required" => "required" 
+						);
+						$data ["form_password_label"] = array (
+								"data-error" => form_error ( 'password', null, null ),
+								"data-success" => "OK" 
+						);
+						
+						$data ["form_password_confirm"] = array (
+								"name" => 'password_confirm',
+								"id" => 'password_confirm',
+								"class" => (empty ( form_error ( "password_confirm" ) )) ? "validate" : "validate invalid",
+								"required" => "required" 
+						);
+						$data ["form_password_confirm_label"] = array (
+								"data-error" => form_error ( 'password_confirm', null, null ),
+								"data-success" => "OK" 
+						);
+						break;
+					default :
+						show_404();
+						break;
+				}
+				$this->load->view ( 'template/head', $data );
+				$this->load->view ( 'template/header' );
+				$this->load->view ( 'account/edit_' . $type, $data );
+				$this->load->view ( 'template/footer' );
+			}
+			else
+			{
+				switch ($type)
+				{
+					case "infos" :
+						$this->account_model->update_infos_user ( array (
+						"email" => set_value ( "email" )
+						), $data ["user"]->id );
+						/*
+						 * Mise à jour des nouvelles données
+						 */
+						$updated_user = $this->account_model->get_user_by_id ( $data ["user"]->id )->row ();
+						unset ( $updated_user->password );
+						$this->session->set_userdata ( "user", $updated_user );
+						redirect ( '/account/me' );
+						break;
+					case "password" :
+						$this->account_model->update_password_user (set_value("password"), $data ["user"]->id);
+						redirect ( '/account/me' );
+						break;
+					default :
+						break;
+				}
+				
+				redirect ( '/account/me' );
+				
+			}
+		}
+		else
+		{
+			redirect ( '/signin' );
 		}
 	}
 }

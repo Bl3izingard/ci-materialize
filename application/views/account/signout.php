@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
+<main>
 <div class="container">
 	<h4>Signed Out</h4>
 	<div class="row">
@@ -14,3 +14,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+</main>
