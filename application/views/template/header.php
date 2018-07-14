@@ -1,7 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-if($this->toolbox->is_logged())
+if ($this->toolbox->is_logged ())
 {
 	$kindMenu = "signed";
 }
@@ -17,98 +17,104 @@ else
 
 // MENU NON CONNECTE
 $menu ["notsign"] ["fullscreen"] = array (
-		"Home" => base_url(),
-		"Sign In" => base_url("signin"),
-		"Sign Up" => base_url("signup")
+		"Home" => base_url (),
+		"Sign In" => base_url ( "signin" ),
+		"Sign Up" => base_url ( "signup" ) 
 );
 $menu ["notsign"] ["mobile"] = array (
-		"Home" => base_url(),
-		"divider" => "",	
-		"Sign In" => base_url("signin"),
-		"Sign Up" => base_url("signup")
+		"Home" => base_url (),
+		"divider" => "",
+		"Sign In" => base_url ( "signin" ),
+		"Sign Up" => base_url ( "signup" ) 
 );
 $menu ["signed"] ["fullscreen"] = array (
-		"Home" => base_url(),
-		"My Account" => base_url("account/me"),
-		"Sign Out" => base_url("signout")
+		"Home" => base_url (),
+		"My Account" => base_url ( "account/me" ),
+		"Sign Out" => base_url ( "signout" ) 
 );
 
 $menu ["signed"] ["mobile"] = array (
-		"Home" => base_url(),
-		"My Account" => base_url("account/me"),
+		"Home" => base_url (),
+		"My Account" => base_url ( "account/me" ),
 		"divider" => "",
-		"Sign Out" => base_url("signout")
+		"Sign Out" => base_url ( "signout" ) 
 );
 
 ?>
 <header>
 	<nav class="white" role="navigation">
 		<div class="nav-wrapper container">
-	<?php 
-		if(isset($template_home))
-		:
-	?>
-			<a id="logo-container" href="#" class="brand-logo">Logo</a>
+	<?php
+	if (isset ( $template_home ))
+	:
+		?>
+	<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
+				class="material-icons">menu</i></a> <a id="logo-container" href="#"
+				class="brand-logo">Logo</a>
 			<ul class="right hide-on-med-and-down">
 	<?php
-			foreach ($menu[$kindMenu]["fullscreen"] as $label => $link)
-			:
-	?>
+		foreach ( $menu [$kindMenu] ["fullscreen"] as $label => $link )
+		:
+			?>
 				<li><a href="<?php echo $link; ?>"><?php echo $label;?></a></li>
 	<?php
-			endforeach;
-	?>
+		endforeach
+		;
+		?>
 			</ul>
-			<ul id="nav-mobile" class="side-nav">
+			<ul id="nav-mobile" class="sidenav">
 	<?php
-			foreach ($menu[$kindMenu]["mobile"] as $label => $link)
+		foreach ( $menu [$kindMenu] ["mobile"] as $label => $link )
+		:
+			if ($label === "divider")
 			:
-				if($label === "divider")
-				:
-	?>
+				?>
 				<li><div class="divider"></div></li>
 	<?php
-				else
-				:
-	?>
+			
+			else
+			:
+				?>
 				<li><a href="<?php echo $link; ?>"><?php echo $label;?></a></li>
 	<?php
-				endif;
-			endforeach;
-	?>
+			endif;
+		endforeach
+		;
+		?>
 			</ul>
-			<a href="#" data-activates="nav-mobile" class="button-collapse"><i
-				class="material-icons">menu</i></a>
 	<?php
-		else 
-		:
-	?>
-		<ul id="nav-mobile" class="side-nav fixed">
+	
+	else
+	:
+		?>
+		<ul id="nav-mobile" class="sidenav fixed">
 				<li class="logo"><a id="logo-container" href="#" class="brand-logo">Logo</a>
 					<object id="front-page-logo" type="image/svg+xml"
 						data="res/materialize.svg">Your browser does not support SVG</object></li>
 	<?php
-			foreach ($menu[$kindMenu]["mobile"] as $label => $link)
+		foreach ( $menu [$kindMenu] ["mobile"] as $label => $link )
+		:
+			if ($label === "divider")
 			:
-				if($label === "divider")
-				:
-	?>
+				?>
 				<li><div class="divider"></div></li>
 	<?php
-				else
-				:
-	?>
+			
+			else
+			:
+				?>
 				<li><a href="<?php echo $link; ?>"><?php echo $label;?></a></li>
 	<?php
-				endif;
-			endforeach;
-	?>	
+			endif;
+		endforeach
+		;
+		?>	
 		</ul>
-		<a href="#" data-activates="nav-mobile" class="button-collapse"><i
-			class="material-icons">menu</i></a>
+			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
+				class="material-icons">menu</i></a> 
 	<?php
-		endif;
+	endif;
 	?>
 		</div>
-	</nav>	
+	</nav>
 </header>

@@ -42,10 +42,16 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 </footer>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	src="<?php echo base_url("assets/js/jquery-3.3.1.min.js");?>"></script>
 
 <!-- Compiled and minified JavaScript -->
-<script src="<?php echo base_url("assets/js/materialize.min.js");?>"></script>
-<script src="<?php echo base_url("assets/js/init.js");?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/materialize.min.js");?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/init.js");?>"></script>
+<?php 
+	if(!empty($extra_js))
+	{
+		printf('<script type="text/javascript" src="%s"></script>', base_url("assets/js/".$extra_js));
+	}
+?>
 </body>
 </html>
