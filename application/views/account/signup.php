@@ -36,7 +36,9 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 				echo form_label ( "Password", "password" );
 				?>
 				<span class="<?php echo $form_password_error["class"]; ?>"
-					data-error="<?php echo $form_password_error["data-error"]; ?>">For security reason please choose a password contain letters, numbers and special characters</span>
+					data-error="<?php echo $form_password_error["data-error"]; ?>">For
+					security reason please choose a password contain letters, numbers
+					and special characters</span>
 			</div>
 			<div class="input-field col s12 m6">
 				<?php
@@ -112,7 +114,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 		</div>
 		<div class="row">
 			<div class="file-field input-field col s12">
-				<div class="btn">
+				<div class="btn ">
 					<span>File</span> <input type="file" name="prooffile"
 						accept="images/jpeg">
 				</div>
@@ -125,15 +127,18 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 			</div>
 		</div>
 		<div class="row">
-		<div class="col s12">
-			<label for="tos"> 
+			<div class="col s12">
+				<label for="tos"> 
 			<?php echo form_checkbox($form_tos); ?> 
-			<span class="<?php echo $form_tos_error["class"]; ?>" data-error="<?php echo $form_tos_error["data-error"]; ?>">I agree to the <a href=#>terms of service</a></span>
-			</label>
+			<span class="<?php echo $form_tos_error["class"]; ?>"
+					data-error="<?php echo $form_tos_error["data-error"]; ?>">I agree
+						to the <a href=#>terms of service</a>
+				</span>
+				</label>
 			</div>
 		</div>
 		<div class="row">
-			<button class="btn waves-effect waves-light" type="submit">
+			<button class="btn waves-effect waves-light " type="submit">
 				Sign up <i class="material-icons right">send</i>
 			</button>
 		</div>

@@ -70,7 +70,7 @@ class Account_model extends CI_Model
 
 	public function get_user_by_login(string $login)
 	{
-		$user = $this->db->get_where ( "User", array (
+		$user = $this->db->get_where ( "V_User", array (
 				"Login" => $login 
 		), 1 );
 		
@@ -79,7 +79,7 @@ class Account_model extends CI_Model
 
 	public function get_user_by_email(string $email)
 	{
-		$user = $this->db->get_where ( "User", array (
+		$user = $this->db->get_where ( "V_User", array (
 				"Email" => $email
 		), 1 );
 		
@@ -88,7 +88,7 @@ class Account_model extends CI_Model
 	
 	public function get_user_by_id(int $id)
 	{
-		$user = $this->db->get_where ( "User", array (
+		$user = $this->db->get_where ( "V_User", array (
 				"id" => $id 
 		), 1 );
 		

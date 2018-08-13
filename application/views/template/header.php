@@ -2,119 +2,64 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 if ($this->toolbox->is_logged ())
-{
-	$kindMenu = "signed";
-}
-else
-{
-	$kindMenu = "notsign";
-}
-
-/*
- * DEFINITION DU CONTENU DES MENUS
- * DANS L'ORDRE D'APPARITION DU MENU
- */
-
-// MENU NON CONNECTE
-$menu ["notsign"] ["fullscreen"] = array (
-		"Home" => base_url (),
-		"Sign In" => base_url ( "signin" ),
-		"Sign Up" => base_url ( "signup" ) 
-);
-$menu ["notsign"] ["mobile"] = array (
-		"Home" => base_url (),
-		"divider" => "",
-		"Sign In" => base_url ( "signin" ),
-		"Sign Up" => base_url ( "signup" ) 
-);
-$menu ["signed"] ["fullscreen"] = array (
-		"Home" => base_url (),
-		"My Account" => base_url ( "account/me" ),
-		"Sign Out" => base_url ( "signout" ) 
-);
-
-$menu ["signed"] ["mobile"] = array (
-		"Home" => base_url (),
-		"My Account" => base_url ( "account/me" ),
-		"divider" => "",
-		"Sign Out" => base_url ( "signout" ) 
-);
 
 ?>
 <header>
-	<nav class="white" role="navigation">
-		<div class="nav-wrapper container">
-	<?php
-	if (isset ( $template_home ))
-	:
-		?>
-	<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
-				class="material-icons">menu</i></a> <a id="logo-container" href="#"
-				class="brand-logo">Logo</a>
+	<ul id="dropdown_myaccount" class="dropdown-content">
+		<li><a href="<?php echo base_url ( "account/me" ); ?>">My Informations</a></li>
+		<li><a href="<?php echo base_url ( "studentproof/status" ); ?>">Student Proof</a></li>
+	</ul>
+	<nav>
+		<div class="nav-wrapper ">
+			<a href="#!" class="brand-logo">MyFirstHost.OVH</a> <a href="#"
+				data-target="mobile-nav" class="sidenav-trigger"><i
+				class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-	<?php
-		foreach ( $menu [$kindMenu] ["fullscreen"] as $label => $link )
-		:
-			?>
-				<li><a href="<?php echo $link; ?>"><?php echo $label;?></a></li>
-	<?php
-		endforeach
-		;
+      <?php
+						if ($this->toolbox->is_logged ())
+						:
+							?>
+      <li><a href="<?php echo base_url (); ?>">Home</a></li>
+				<li><a class="dropdown-trigger" href="#!"
+					data-target="dropdown_myaccount">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a href="<?php echo base_url ("myhost"); ?>">My MFH</a></li>
+				<li><a href="<?php echo base_url ( "signout" ); ?>">Sign Out</a></li>
+      <?php
+						
+						else
+						:
+							?>
+		<li><a href="<?php echo base_url (); ?>">Home</a></li>
+				<li><a href="<?php echo base_url ( "signin" ); ?>">Sign In</a></li>
+				<li><a href="<?php echo base_url ( "signup" ); ?>">Sign Up</a></li>
+        <?php
+						endif;
 		?>
-			</ul>
-			<ul id="nav-mobile" class="sidenav">
-	<?php
-		foreach ( $menu [$kindMenu] ["mobile"] as $label => $link )
-		:
-			if ($label === "divider")
-			:
-				?>
-				<li><div class="divider"></div></li>
-	<?php
-			
-			else
-			:
-				?>
-				<li><a href="<?php echo $link; ?>"><?php echo $label;?></a></li>
-	<?php
-			endif;
-		endforeach
-		;
-		?>
-			</ul>
-	<?php
-	
-	else
-	:
-		?>
-		<ul id="nav-mobile" class="sidenav fixed">
-				<li class="logo"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-					<object id="front-page-logo" type="image/svg+xml"
-						data="res/materialize.svg">Your browser does not support SVG</object></li>
-	<?php
-		foreach ( $menu [$kindMenu] ["mobile"] as $label => $link )
-		:
-			if ($label === "divider")
-			:
-				?>
-				<li><div class="divider"></div></li>
-	<?php
-			
-			else
-			:
-				?>
-				<li><a href="<?php echo $link; ?>"><?php echo $label;?></a></li>
-	<?php
-			endif;
-		endforeach
-		;
-		?>	
-		</ul>
-			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
-				class="material-icons">menu</i></a> 
-	<?php
-	endif;
-	?>
+      </ul>
 		</div>
 	</nav>
+
+	<ul class="sidenav" id="mobile-nav">
+    <?php
+				if ($this->toolbox->is_logged ())
+				:
+					?>
+      <li><a href="<?php echo base_url (); ?>">Home</a></li>
+				<li><a href="<?php echo base_url ("account/me"); ?>">My Account</a></li>
+				<li class="disabled"><a href="<?php echo base_url ("myhost"); ?>">My MFH</a></li>
+				<li class="divider"></li>
+				<li><a href="<?php echo base_url ("signout"); ?>">Sign Out</a></li>
+      <?php
+				
+				else
+				:
+					?>
+		<li><a href="<?php echo base_url (); ?>">Home</a></li>
+				<li><a href="<?php echo base_url ("signin"); ?>">Sign In</a></li>
+				<li class="divider"></li>
+				<li><a href="<?php echo base_url ("signout"); ?>">Sign Out</a></li>
+        <?php
+				endif;
+		?>
+  </ul>
 </header>

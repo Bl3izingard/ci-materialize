@@ -9,13 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   	
   	<link href="<?php echo base_url("assets/css/materialize.min.css");?>" rel="stylesheet" media="screen,projection">
   	<link href="<?php echo base_url("assets/css/style.css");?>" type="text/css" rel="stylesheet" media="screen,projection"/>
-  	<?php 
-  	if(!isset($template_home)) :
-  	?>
-  	<link href="<?php echo base_url("assets/css/fullscreensidemenu.css");?>" type="text/css" rel="stylesheet" media="screen,projection"/>
-  	<?php
-  		endif;
-  	?>
+  	
   	
   	<!-- <link href="<?php echo base_url("assets/font/roboto/");?>" rel="stylesheet">  -->
   	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

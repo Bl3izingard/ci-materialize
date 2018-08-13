@@ -42,12 +42,12 @@ class Account extends CI_Controller
 					"id" => 'password',
 					"value" => set_value ( "password" ),
 					"class" => (empty ( form_error ( "password" ) )) ? "validate" : "validate invalid",
-					"required" => "required"
+					"required" => "required" 
 			);
 			$data ["form_password_error"] = array (
 					"class" => "helper-text",
-					"data-error" => form_error ( 'password', null, null )
-					
+					"data-error" => form_error ( 'password', null, null ) 
+			
 			);
 			
 			$data ["form_email"] = array (
@@ -55,12 +55,12 @@ class Account extends CI_Controller
 					"id" => 'email',
 					"value" => set_value ( "email" ),
 					"class" => (empty ( form_error ( "email" ) )) ? "validate" : "validate invalid",
-					"required" => "required"
+					"required" => "required" 
 			);
 			$data ["form_email_error"] = array (
 					"class" => "helper-text",
-					"data-error" => form_error ( 'email', null, null )
-					
+					"data-error" => form_error ( 'email', null, null ) 
+			
 			);
 			
 			if (! $user_data && $this->form_validation->run ())
@@ -137,26 +137,26 @@ class Account extends CI_Controller
 
 	public function signup()
 	{
-		//Upload file config
-		$config['upload_path'] = '/var/www/html/mfh/upload/';
-		$config['allowed_types'] = 'jpg';
-		$config['max_size']     = '256';
-		$config['max_width'] = '1024';
-		$config['max_height'] = '1200';
-		$config['encrypt_name'] = true;
-		$config['file_ext_tolower'] = true;
+		// Upload file config
+		$config ['upload_path'] = 'C:/Git/mfh/upload/';
+		$config ['allowed_types'] = 'jpg';
+		$config ['max_size'] = '256';
+		$config ['max_width'] = '1024';
+		$config ['max_height'] = '1200';
+		$config ['encrypt_name'] = true;
+		$config ['file_ext_tolower'] = true;
 		
-		
+
 		// Page Title
 		$data ["title_page"] = "Sign Up";
 		$data ["template_home"] = "";
 		
-		$footer["extra_js"] = "init_signup.js";
+		$footer ["extra_js"] = "init_signup.js";
 		
-		$this->load->library('upload', $config);
+		$this->load->library ( 'upload', $config );
 		
-		
-		$upload_result = $this->upload->do_upload('prooffile');
+
+		$upload_result = $this->upload->do_upload ( 'prooffile' );
 		
 		if ($this->form_validation->run () == FALSE || ! $upload_result)
 		{
@@ -294,24 +294,25 @@ class Account extends CI_Controller
 					"data-error" => form_error ( 'country', null, null ) 
 			
 			);
-			$data["form_prooffile"] = array (
-					"class" => (!$this->input->post() || empty ( $this->upload->display_errors('', ''))) ? "file-path validate" : "file-path validate invalid"
+			$data ["form_prooffile"] = array (
+					"class" => (! $this->input->post () || empty ( $this->upload->display_errors ( '', '' ) )) ? "file-path validate" : "file-path validate invalid" 
 			);
-			$data["form_prooffile_error"] = array(
+			$data ["form_prooffile_error"] = array (
 					"class" => "helper-text",
-					"data-error" => $this->upload->display_errors('', ''));
+					"data-error" => $this->upload->display_errors ( '', '' ) 
+			);
 			$data ["form_tos"] = array (
 					"name" => 'tos',
 					"id" => 'tos',
 					"value" => "tos",
-					"checked" => set_value("tos"),
+					"checked" => set_value ( "tos" ),
 					"class" => (empty ( form_error ( "tos" ) )) ? "validate" : "validate invalid",
-					"required" => "required"
+					"required" => "required" 
 			);
 			$data ["form_tos_error"] = array (
 					"class" => "helper-text",
-					"data-error" => form_error ( 'tos', null, null )
-					
+					"data-error" => form_error ( 'tos', null, null ) 
+			
 			);
 			
 			$this->load->view ( 'template/head', $data );
@@ -333,10 +334,10 @@ class Account extends CI_Controller
 					"Street" => set_value ( "street" ),
 					"City" => set_value ( "city" ),
 					"ZipCode" => set_value ( "zipcode" ),
-					"IdCountry" => set_value ( "country" )
+					"IdCountry" => set_value ( "country" ) 
 			);
 			
-			$prooffile = $this->upload->data();
+			$prooffile = $this->upload->data ();
 			
 			/*
 			 * Insert into BDD
@@ -358,10 +359,74 @@ class Account extends CI_Controller
 	{
 		if ($this->toolbox->is_logged ())
 		{
+			$this->load->model ( "studentproof_model" );
+			
+			$footer ["extra_js"] = "init_edit.js";
 			
 			// Page Title
 			$data ["title_page"] = "";
 			$data ["user"] = $this->session->get_userdata ( "user" ) ["user"];
+			
+			$studentproof = $this->studentproof_model->get_current_studentproof_status_by_user_id($data ["user"]->Id);
+			
+			/*
+			 * Get StudentProof  
+			 */			
+			if (! $studentproof)
+			{
+				
+				$data["studentproof_text"]["class"] = "";
+				$data["studentproof_text"]["value"] = "Your student status is verified and up to date.";
+				
+				$data["studentproof_icon"]["class"] = "material-icons";
+				$data["studentproof_icon"]["value"] = "thumb_up";
+				
+				
+			}
+			else
+			{
+				switch ($studentproof)
+				{
+					case 1 :
+						// Aucun certificat étudiant n'a été téléchargé
+						$data["studentproof_text"]["class"] = "flow-text";
+						$data["studentproof_text"]["value"] = "You did not upload any schoolproof";
+						
+						$data["studentproof_icon"]["class"] = "material-icons";
+						$data["studentproof_icon"]["value"] = "warning";
+						
+						break;
+					case 2 :
+						$data["studentproof_text"]["class"] = "flow-text";
+						$data["studentproof_text"]["value"] = "Your document is under verification.";
+						
+						$data["studentproof_icon"]["class"] = "material-icons";
+						$data["studentproof_icon"]["value"] = "info";
+						break;
+					case 3 :
+						$data["studentproof_text"]["class"] = "flow-text";
+						$data["studentproof_text"]["value"] = "Your document is not valid.";
+						
+						$data["studentproof_icon"]["class"] = "material-icons";
+						$data["studentproof_icon"]["value"] = "error";
+						break;
+					case 4 :
+						$data["studentproof_text"]["class"] = "flow-text";
+						$data["studentproof_text"]["value"] = "Your student status has expired.";
+						
+						$data["studentproof_icon"]["class"] = "material-icons";
+						$data["studentproof_icon"]["value"] = "warning";
+						break;
+					default :
+						$data["studentproof_text"]["class"] = "flow-text";
+						$data["studentproof_text"]["value"] = "An error is occured about check status. Please contact administrator and give him URL and following code : ".$studentproof;
+						
+						$data["studentproof_icon"]["class"] = "material-icons";
+						$data["studentproof_icon"]["value"] = "report_error";
+						break;
+				}
+			}		
+			
 			
 			/*
 			 * Edit Mail Form Prep Data
@@ -374,10 +439,45 @@ class Account extends CI_Controller
 					"required" => "required" 
 			);
 			
+			$data ["form_street"] = array (
+					"name" => 'street',
+					"id" => 'street',
+					"value" => $data ["user"]->Street,
+					"class" => "validate",
+					"required" => "required" 
+			);
+			
+			$data ["form_city"] = array (
+					"name" => 'city',
+					"id" => 'city',
+					"value" => $data ["user"]->City,
+					"class" => "validate",
+					"required" => "required" 
+			);
+			
+			$data ["form_zipcode"] = array (
+					"name" => 'zipcode',
+					"id" => 'zipcode',
+					"value" => $data ["user"]->ZipCode,
+					"class" => "validate",
+					"required" => "required" 
+			);
+			
+			$data ["form_country"] = array (
+					"name" => 'country',
+					"options" => $this->account_model->get_countries (),
+					"selected" => $data ["user"]->IdCountry,
+					"extra" => array (
+							"id" => 'country',
+							"class" => "validate",
+							"required" => "required" 
+					) 
+			);
+			
 			$this->load->view ( 'template/head', $data );
 			$this->load->view ( 'template/header' );
 			$this->load->view ( 'account/profile', $data );
-			$this->load->view ( 'template/footer' );
+			$this->load->view ( 'template/footer', $footer );
 		}
 		else
 		{
@@ -408,27 +508,87 @@ class Account extends CI_Controller
 	{
 		if ($this->toolbox->is_logged ())
 		{
+			$footer ["extra_js"] = "init_edit.js";
+			
 			// Page Title
 			$data ["title_page"] = "Change my informations";
 			$data ["user"] = $this->session->get_userdata ( "user" ) ["user"];
-			
+						
 			if ($this->form_validation->run () == FALSE)
 			{
 				switch ($type)
 				{
+					case "email" :
+						$data ["form_email"] = array (
+						"name" => 'email',
+						"id" => 'email',
+						"value" => (! empty ( set_value ( "email" ) )) ? set_value ( "email" ) : $data ["user"]->Email,
+						"class" => (empty ( form_error ( "email" ) )) ? "validate" : "validate invalid",
+						"required" => "required"
+								);
+						$data ["form_email_error"] = array (
+								"class" => "helper-text",
+								"data-error" => form_error ( 'email', null, null )
+						);
+						
+						break;
 					case "infos" :
 					/*
 					 * Edit Infos Form Prep Data
 					 */
-					$data ["form_email"] = array (
-								"name" => 'email',
-								"id" => 'email',
-								"value" => (! empty ( set_value ( "email" ) )) ? set_value ( "email" ) : $data ["user"]->email,
-								"class" => (empty ( form_error ( "email" ) )) ? "validate" : "validate invalid",
+					
+						$data ["form_street"] = array (
+								"name" => 'street',
+								"id" => 'street',
+								"value" => (! empty ( set_value ( "street" ) )) ? set_value ( "street" ) : $data ["user"]->Street,
+								"class" => (empty ( form_error ( "street" ) )) ? "validate" : "validate invalid",
 								"required" => "required" 
 						);
-						$data ["form_email_label"] = array (
-								"data-error" => form_error ( 'email', null, null ) 
+						$data ["form_street_error"] = array (
+								"class" => "helper-text",
+								"data-error" => form_error ( 'street', null, null ) 
+						
+						);
+						
+						$data ["form_city"] = array (
+								"name" => 'city',
+								"id" => 'city',
+								"value" => (! empty ( set_value ( "city" ) )) ? set_value ( "city" ) : $data ["user"]->City,
+								"class" => (empty ( form_error ( "city" ) )) ? "validate" : "validate invalid",
+								"required" => "required" 
+						);
+						$data ["form_city_error"] = array (
+								"class" => "helper-text",
+								"data-error" => form_error ( 'city', null, null ) 
+						
+						);
+						
+						$data ["form_zipcode"] = array (
+								"name" => 'zipcode',
+								"id" => 'zipcode',
+								"value" => (! empty ( set_value ( "zipcode" ) )) ? set_value ( "zipcode" ) : $data ["user"]->ZipCode,
+								"class" => (empty ( form_error ( "zipcode" ) )) ? "validate" : "validate invalid",
+								"required" => "required" 
+						);
+						$data ["form_zipcode_error"] = array (
+								"class" => "helper-text",
+								"data-error" => form_error ( 'zipcode', null, null ) 
+						
+						);
+						
+						$data ["form_country"] = array (
+								"name" => 'country',
+								"options" => $this->account_model->get_countries (),
+								"selected" => (! empty ( set_value ( "country" ) )) ? set_value ( "country" ) : $data ["user"]->IdCountry,
+								"extra" => array (
+										"id" => 'country',
+										"class" => (empty ( form_error ( "country" ) )) ? "validate" : "validate invalid",
+										"required" => "required" 
+								) 
+						);
+						$data ["form_country_error"] = array (
+								"class" => "helper-text",
+								"data-error" => form_error ( 'country', null, null ) 
 						
 						);
 						
@@ -479,20 +639,37 @@ class Account extends CI_Controller
 				$this->load->view ( 'template/head', $data );
 				$this->load->view ( 'template/header' );
 				$this->load->view ( 'account/edit_' . $type, $data );
-				$this->load->view ( 'template/footer' );
+				$this->load->view ( 'template/footer', $footer );
 			}
 			else
 			{
 				switch ($type)
 				{
-					case "infos" :
+					case "email" :
 						$this->account_model->update_infos_user ( array (
-								"email" => set_value ( "email" ) 
-						), $data ["user"]->id );
+						"Email" => set_value ( "email" )
+						), $data ["user"]->Id );
+						
 						/*
 						 * Mise à jour des nouvelles données
 						 */
-						$updated_user = $this->account_model->get_user_by_id ( $data ["user"]->id )->row ();
+						$updated_user = $this->account_model->get_user_by_id ( $data ["user"]->Id )->row ();
+						unset ( $updated_user->password );
+						$this->session->set_userdata ( "user", $updated_user );
+						redirect ( '/account/me' );
+						
+						break;
+					case "infos" :
+						$this->account_model->update_infos_user ( array (
+						"Street" => set_value ( "street" ),
+						"City" => set_value ( "city" ),
+						"ZipCode" => set_value ( "zipcode" ),
+						"IdCountry" => set_value ( "country" ) 
+						), $data ["user"]->Id );
+						/*
+						 * Mise à jour des nouvelles données
+						 */
+						$updated_user = $this->account_model->get_user_by_id ( $data ["user"]->Id )->row ();
 						unset ( $updated_user->password );
 						$this->session->set_userdata ( "user", $updated_user );
 						redirect ( '/account/me' );

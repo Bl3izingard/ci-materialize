@@ -72,32 +72,10 @@ $config = array (
 				) 
 		),
 		'account/edit/infos' => array (
-				array (
-						'field' => 'email',
-						'label' => 'Email',
-						'rules' => 'trim|no_space|strtolower|required|valid_email|max_length[50]|is_unique[User.Email]' 
-				) 
-		),
-		'account/edit/password' => array (
-				array (
-						'field' => 'old_password',
-						'label' => 'Old Password',
-						'rules' => 'trim|required|matches_password[User.Password]' 
-				),
-				array (
-						'field' => 'password',
-						'label' => 'Password',
-						'rules' => 'trim|required|min_length[8]|max_length[30]' 
-				),
-				array (
-						'field' => 'password_confirm',
-						'label' => 'Password Confirmation',
-						'rules' => 'trim|required|matches[Password]' 
-				),
-				array (
+								array (
 						'field' => 'street',
 						'label' => 'Street',
-						'rules' => 'trim|no_space|strtoupper|required|max_length[255]'
+						'rules' => 'trim|strtoupper|required|max_length[255]'
 				),
 				array (
 						'field' => 'city',
@@ -114,5 +92,28 @@ $config = array (
 						'label' => 'Contry',
 						'rules' => 'required'
 				)
-		) 
+		),
+		'account/edit/password' => array (
+				array (
+						'field' => 'old_password',
+						'label' => 'Old Password',
+						'rules' => 'trim|required|matches_password[User.Password]' 
+				),
+				array (
+						'field' => 'password',
+						'label' => 'Password',
+						'rules' => 'trim|required|min_length[8]|max_length[30]' 
+				),
+				array (
+						'field' => 'password_confirm',
+						'label' => 'Password Confirmation',
+						'rules' => 'trim|required|matches[Password]' 
+				)
+		),
+		'account/edit/email' => array (
+				array (
+						'field' => 'email',
+						'label' => 'Email',
+						'rules' => 'trim|no_space|strtolower|required|valid_email|max_length[255]|is_unique[User.Email]'
+				))
 );
